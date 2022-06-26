@@ -26,7 +26,6 @@ public extension Flow {
     /// More detail can be found here: https://docs.onflow.org/access-api
     @available(iOS 13, *)
     final class GRPCAccessAPI: FlowAccessProtocol {
-        
         public init(clientChannel: ClientConnection, accessClient: Flow_Access_AccessAPIClient) {
             self.clientChannel = clientChannel
             self.accessClient = accessClient
@@ -304,15 +303,15 @@ public extension Flow {
             let result = try await accessClient.getLatestProtocolStateSnapshot(request).response.get()
             return Flow.Snapshot(data: result.serializedSnapshot)
         }
-        
+
         public func executeScriptAtLatestBlock(script: Flow.Script, arguments: [Flow.Cadence.FValue]) async throws -> Flow.ScriptResponse {
             return try await executeScriptAtLatestBlock(script: script, arguments: arguments.toArguments())
         }
-        
+
         public func executeScriptAtBlockId(script: Flow.Script, blockId: Flow.ID, arguments: [Flow.Cadence.FValue]) async throws -> Flow.ScriptResponse {
             return try await executeScriptAtBlockId(script: script, blockId: blockId, arguments: arguments.toArguments())
         }
-        
+
         public func executeScriptAtBlockHeight(script: Flow.Script, height: UInt64, arguments: [Flow.Cadence.FValue]) async throws -> Flow.ScriptResponse {
             return try await executeScriptAtBlockHeight(script: script, height: height, arguments: arguments.toArguments())
         }
